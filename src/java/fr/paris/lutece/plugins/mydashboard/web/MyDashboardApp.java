@@ -194,6 +194,12 @@ public class MyDashboardApp extends MVCApplication
 
         MyDashboardService dashboardService = _myDashboardService;
 
+        if ( dashboardService.isPanelEnabled(  ) )
+        {
+            // The panels of the back office give the dashboards and their order: the configuration of the user is not used
+            return redirectView( request, VIEW_GET_DASHBOARDS );
+        }
+
         Map<String, Object> model = new HashMap<String, Object>(  );
         List<MyDashboardConfiguration> listDashboardConfig = dashboardService.getUserConfig( luteceUser );
         List<IMyDashboardComponent> listDashboardComponents = dashboardService.getMyDashboardComponentsList( luteceUser );

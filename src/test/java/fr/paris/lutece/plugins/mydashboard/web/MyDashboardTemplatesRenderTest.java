@@ -168,6 +168,24 @@ public class MyDashboardTemplatesRenderTest
     }
 
     /**
+     * The link to the page that hides and orders the dashboards is offered only without the panels of the back office,
+     * which give the dashboards and their order
+     *
+     * @throws Exception
+     *             if the rendering fails
+     */
+    @Test
+    public void testDashboardPageOffersTheModificationOnlyWithoutPanels( ) throws Exception
+    {
+        Map<String, Object> model = new HashMap<>( );
+        model.put( "listDashboardsContent", HtmlMarkup.ofAll( List.of( FRAGMENT ) ) );
+        assertTrue( render( TEMPLATE_DASHBOARDS, model ).contains( "view=getModifyDashboards" ) );
+
+        model.put( "listPanel", List.of( ) );
+        assertFalse( render( TEMPLATE_DASHBOARDS, model ).contains( "view=getModifyDashboards" ) );
+    }
+
+    /**
      * A component fragment left as a String, as plugin-mydashboard put it before LUT-33153, prints as text: the reason of
      * the HtmlMarkup.ofAll of the consumer.
      *
