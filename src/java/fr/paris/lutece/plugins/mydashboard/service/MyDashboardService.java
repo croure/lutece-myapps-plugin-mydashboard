@@ -442,6 +442,9 @@ public class MyDashboardService
         {
             saveMyDashboardConfigListInSession( null );
         }
+
+        // The dashboards of the session are built from the configurations: build them again
+        clearMyDashboardListsInSession(  );
     }
 
     /**
@@ -456,6 +459,14 @@ public class MyDashboardService
         }
 
         saveMyDashboardConfigListInSession( listMyDashboardsConfig );
+        clearMyDashboardListsInSession(  );
+    }
+
+    /**
+     * Remove from the session the lists of dashboards, of every panel
+     */
+    private void clearMyDashboardListsInSession(  )
+    {
         saveMyDashboardListInSession( null, null );
 
         if ( isPanelEnabled(  ) )
